@@ -49,12 +49,20 @@ const status=card.querySelector('.status')
   if(clickElement.classList.contains('interview')){
     status.innerText='Interviewed'
     interviewContainer.appendChild(card)
+    updateStat()
   }
   if(clickElement.classList.contains('reject')){
     status.innerText='Rejected'
     rejectContainer.appendChild(card)
+    updateStat()
   }
   if(clickElement.classList.contains('delete')){
     parent.removeChild(card)
   }
 })
+function updateStat(){
+totalStat.innerText=allContainer.children.length
+interviewStat.innerText=interviewContainer.children.length
+rejectStat.innerText=rejectContainer.children.length
+}
+updateStat()
