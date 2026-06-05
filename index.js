@@ -43,14 +43,18 @@ switchTab(currentTab)
 document.getElementById('jobs-container').addEventListener('click',function(event){
   const clickElement=event.target
 const card=clickElement.closest('.card')
-console.log(card)
+const parent=card.parentNode
+const status=card.querySelector('.status')
+
   if(clickElement.classList.contains('interview')){
-    // console.log('interview clicked')
+    status.innerText='Interviewed'
+    interviewContainer.appendChild(card)
   }
   if(clickElement.classList.contains('reject')){
-    // console.log('reject clicked')
+    status.innerText='Rejected'
+    rejectContainer.appendChild(card)
   }
   if(clickElement.classList.contains('delete')){
-    // console.log('delete clicked')
+    parent.removeChild(card)
   }
 })
