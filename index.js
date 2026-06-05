@@ -34,4 +34,15 @@ else{
     rejectContainer.classList.remove('hidden')
 }
 }
+//stat update
+const totalStat=document.getElementById('stat-total')
+const interviewStat=document.getElementById('stat-interview')
+const rejectStat=document.getElementById('stat-rejected')
+totalStat.innerText=allContainer.children.length
 switchTab(currentTab)
+document.getElementById('jobs-container').addEventListener('click',function(event){
+  const clickElement=event.target
+  if(clickElement.classList.contains('interview')){
+    
+  }
+})
