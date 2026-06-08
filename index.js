@@ -45,6 +45,7 @@ else{
       emptyState.classList.remove('hidden')
     }
 }
+updateStat()
 }
 //stat update
 const totalStat=document.getElementById('stat-total')
@@ -85,6 +86,11 @@ const counts={
 totalStat.innerText=counts.all
 interviewStat.innerText=counts.interview
 rejectStat.innerText=counts.rejected
-availableStat.innerText=counts.all
+availableStat.innerText=counts[currentTab]
+if(counts[currentTab]<1){
+      emptyState.classList.remove('hidden')
+}else{
+     emptyState.classList.add('hidden')
+}
 }
 updateStat()
