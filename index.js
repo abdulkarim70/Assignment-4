@@ -4,8 +4,10 @@ const tabInactive=['bg-transparent', 'text-slate-700','border-slate-200', 'text-
 const allContainer=document.getElementById('all-container');
 const interviewContainer=document.getElementById('interview-container');
 const rejectContainer=document.getElementById('reject-container');
+const emptyState=document.getElementById('empty-state')
 
 function switchTab(tab){
+currentTab=tab;
 const tabs=['all','interview','rejected']
 for(const t of tabs){
 
@@ -24,20 +26,31 @@ const pages=[allContainer, interviewContainer, rejectContainer]
 for(const section of pages){
     section.classList.add('hidden');
 }
+emptyState.classList.add('hidden')
 if(tab==='all'){
     allContainer.classList.remove('hidden');
+    if(allContainer.children.length<1){
+      emptyState.classList.remove('hidden')
+    }
 }
 else if(tab==='interview'){
     interviewContainer.classList.remove('hidden')
+     if(interviewContainer.children.length<1){
+      emptyState.classList.remove('hidden')
+    }
 }
 else{
     rejectContainer.classList.remove('hidden')
+     if(rejectContainer.children.length<1){
+      emptyState.classList.remove('hidden')
+    }
 }
 }
 //stat update
 const totalStat=document.getElementById('stat-total')
 const interviewStat=document.getElementById('stat-interview')
 const rejectStat=document.getElementById('stat-rejected')
+const availableStat=document.getElementById('available')
 totalStat.innerText=allContainer.children.length
 switchTab(currentTab)
 document.getElementById('jobs-container').addEventListener('click',function(event){
@@ -58,11 +71,20 @@ const status=card.querySelector('.status')
   }
   if(clickElement.classList.contains('delete')){
     parent.removeChild(card)
-  }
+    updateStat()
+    switchTab(currentTab)
+}
 })
 function updateStat(){
-totalStat.innerText=allContainer.children.length
-interviewStat.innerText=interviewContainer.children.length
-rejectStat.innerText=rejectContainer.children.length
+
+const counts={
+  all:allContainer.children.length,
+  interview:interviewContainer.children.length,
+  rejected:rejectContainer.children.length
+}
+totalStat.innerText=counts.all
+interviewStat.innerText=counts.interview
+rejectStat.innerText=counts.rejected
+availableStat.innerText=counts.all
 }
 updateStat()
